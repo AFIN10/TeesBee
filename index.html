@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TeesBee | Premium Action T-Shirts</title>
+    <!-- Social Icons from FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <!-- Top Announcement Bar -->
+    <div class="top-bar">
+      <div class="top-bar-left">
+        <a id="link-yt-top" href="#" target="_blank"><i class="fa-brands fa-youtube" style="font-size: 1.1rem;"></i></a>
+        <a id="link-ig-top" href="#" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+      </div>
+      <div class="top-bar-center">
+        Free Shipping for all Prepaid orders
+      </div>
+      <div class="top-bar-right"></div>
+    </div>
+
+    <!-- Main Header & Navigation -->
+    <header class="main-header">
+      <nav class="nav-left">
+        <a href="#" id="link-home">Home</a>
+        <a href="#" id="link-catalog">Catalog</a>
+        <a id="link-contact-nav" href="#contact">Contact</a>
+        <a href="#know-us">Know us</a>
+      </nav>
+      
+      <div class="logo-center" id="link-brand" style="cursor: pointer;">
+        <img src="/logo.png" alt="TeesBee Logo" class="brand-logo" />
+        <span class="brand-name">TeesBee</span>
+      </div>
+
+      <div class="nav-right">
+        <i class="fa-solid fa-magnifying-glass" id="search-icon" title="Search"></i>
+        <i class="fa-regular fa-user" id="profile-icon" title="Login / Profile"></i>
+        <i class="fa-solid fa-bag-shopping" id="cart-icon" title="Cart"></i>
+      </div>
+    </header>
+
+    <!-- Admin Panel (Hidden by Default) -->
+    <section id="admin-panel" class="hidden">
+      <h3>Admin Dashboard</h3>
+      <p>Welcome, Admin! Manage your TeesBee stock here. Add or delete items as needed.</p>
+      <form id="add-product-form">
+        <div style="display: flex; gap: 15px; flex-wrap: wrap; width: 100%;">
+          <input type="text" id="prod-name" placeholder="T-Shirt Name" required />
+          <input type="number" id="prod-price" placeholder="Price (₹)" required />
+          <input type="file" id="prod-image-file" accept="image/*" required style="padding-top: 9px;" />
+        </div>
+        
+        <div style="flex-basis: 100%; display: flex; gap: 20px; margin-top: 15px; width: 100%;">
+          <fieldset style="border: 1px solid #333; border-radius: 8px; padding: 15px; flex: 1;">
+            <legend style="font-size: 0.85rem; color: #888; padding: 0 5px;">Available Sizes</legend>
+            <div style="display: flex; gap: 15px; flex-wrap: wrap; margin-top: 5px;">
+              <label style="cursor: pointer;"><input type="checkbox" value="S" class="size-cb" checked> S</label>
+              <label style="cursor: pointer;"><input type="checkbox" value="M" class="size-cb" checked> M</label>
+              <label style="cursor: pointer;"><input type="checkbox" value="L" class="size-cb" checked> L</label>
+              <label style="cursor: pointer;"><input type="checkbox" value="XL" class="size-cb" checked> XL</label>
+              <label style="cursor: pointer;"><input type="checkbox" value="XXL" class="size-cb" checked> XXL</label>
+            </div>
+          </fieldset>
+
+          <fieldset style="border: 1px solid #333; border-radius: 8px; padding: 15px; flex: 1;">
+            <legend style="font-size: 0.85rem; color: #888; padding: 0 5px;">Available Sleeves</legend>
+            <div style="display: flex; gap: 15px; flex-wrap: wrap; margin-top: 5px;">
+              <label style="cursor: pointer;"><input type="checkbox" value="Half" class="sleeve-cb" checked> Half</label>
+              <label style="cursor: pointer;"><input type="checkbox" value="Full" class="sleeve-cb" checked> Full</label>
+            </div>
+          </fieldset>
+        </div>
+
+        <button type="submit" class="btn-primary" style="flex-basis: 100%; margin-top: 15px;">Add New T-Shirt</button>
+      </form>
+      
+      <h3 style="margin-top:25px;">Store Settings</h3>
+      <form id="update-settings-form" style="display:flex; gap:15px; flex-wrap:wrap; margin-bottom:15px;">
+        <input type="text" id="setting-whatsapp" placeholder="WhatsApp No. (e.g. 91987654321)" required style="padding: 12px; background: #1a1a1a; border: 1px solid #333; color: white; border-radius: 8px; flex: 1; min-width: 200px;" />
+        <input type="text" id="setting-yt" placeholder="YouTube URL" required style="padding: 12px; background: #1a1a1a; border: 1px solid #333; color: white; border-radius: 8px; flex: 1; min-width: 200px;" />
+        <input type="text" id="setting-ig" placeholder="Instagram URL" required style="padding: 12px; background: #1a1a1a; border: 1px solid #333; color: white; border-radius: 8px; flex: 1; min-width: 200px;" />
+        <input type="text" id="setting-contact" placeholder="Contact Email or URL" required style="padding: 12px; background: #1a1a1a; border: 1px solid #333; color: white; border-radius: 8px; flex: 1; min-width: 200px;" />
+        <button type="submit" class="btn-primary">Save Settings</button>
+      </form>
+
+      <button id="logout-btn" class="btn-secondary" style="margin-top: 5px;">Logout</button>
+    </section>
+
+    <!-- Login/Register Modal -->
+    <div id="login-modal" class="modal hidden">
+      <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        
+        <div class="auth-tabs">
+            <button id="tab-user-btn" class="auth-tab active">Customer</button>
+            <button id="tab-admin-btn" class="auth-tab">Admin</button>
+        </div>
+
+        <!-- User Login Form -->
+        <form id="user-login-form" style="display: flex; flex-direction: column; gap: 15px;">
+          <input type="text" id="user-name" placeholder="Full Name" required style="padding: 14px; background: #1a1a1a; border: 1px solid #333; color: white; border-radius: 8px;" />
+          <input type="tel" id="user-phone" placeholder="Phone Number" required style="padding: 14px; background: #1a1a1a; border: 1px solid #333; color: white; border-radius: 8px;" />
+          <input type="email" id="user-email" placeholder="Email Address" required style="padding: 14px; background: #1a1a1a; border: 1px solid #333; color: white; border-radius: 8px;" />
+          <button type="submit" class="btn-primary" style="margin-top: 10px;">Continue</button>
+        </form>
+
+        <!-- Admin Login Form -->
+        <form id="admin-login-form" class="hidden" style="display: flex; flex-direction: column; gap: 15px;">
+          <input type="text" id="admin-username" placeholder="Admin Username" required style="padding: 14px; background: #1a1a1a; border: 1px solid #333; color: white; border-radius: 8px;" />
+          <input type="password" id="admin-password" placeholder="Password" required style="padding: 14px; background: #1a1a1a; border: 1px solid #333; color: white; border-radius: 8px;" />
+          <button type="submit" class="btn-primary" style="margin-top: 10px;">Login</button>
+          <p class="demo-info">Demo: admin/admin123</p>
+        </form>
+
+      </div>
+    </div>
+
+
+
+    <!-- Home View -->
+    <div id="home-view">
+      <!-- Products Section -->
+      <main class="products-section" id="catalog">
+        <h2 style="margin-bottom: 20px; font-weight: 700;">Latest Collections</h2>
+        <div class="products-grid" id="products-grid"></div>
+        
+        <div style="text-align: center; margin-top: 50px;">
+          <button class="btn-view-all">View all</button>
+        </div>
+      </main>
+
+      <!-- Giveaway Section -->
+      <section class="giveaway-section">
+        <h2>Join this month's giveaway</h2>
+        <p>Be the first to know about new collections and exclusive offers.</p>
+        <form class="giveaway-form" onsubmit="event.preventDefault(); alert('Subscribed!')">
+          <div class="input-group">
+            <input type="email" placeholder="Email" required />
+            <button type="submit"><i class="fa-solid fa-arrow-right"></i></button>
+          </div>
+        </form>
+        <h3>Win upto Rs.1000</h3>
+        <p class="giveaway-desc">Subscribe to our emails and get a chance to win upto Rs.1000 as a part of monthly Giveaways.</p>
+        <div class="giveaway-social">
+          <a id="link-yt-giveaway" href="#" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+          <a id="link-ig-giveaway" href="#" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+        </div>
+      </section>
+    </div>
+
+    <!-- Product Details View -->
+    <div id="product-view" class="hidden">
+      <div class="pdp-container">
+        <!-- Left Image -->
+        <div class="pdp-image">
+          <img src="" id="pdp-img" alt="Product Image" />
+        </div>
+        <!-- Right Details -->
+        <div class="pdp-details">
+          <p class="brand-subtitle">TEESBEE</p>
+          <h1 id="pdp-name">PRODUCT NAME</h1>
+          <p class="pdp-price" id="pdp-price">Rs. 0.00</p>
+          <p class="pdp-shipping"><u>Shipping</u> calculated at checkout.</p>
+          
+          <div class="pdp-option">
+            <label>Size</label>
+            <div class="pill-group" id="size-group">
+              <button class="pill size-pill active">S</button>
+              <button class="pill size-pill">M</button>
+              <button class="pill size-pill">L</button>
+              <button class="pill size-pill">XL</button>
+              <button class="pill size-pill">XXL</button>
+            </div>
+          </div>
+          
+          <div class="pdp-option">
+            <label>Color</label>
+            <div class="pill-group" id="color-group">
+              <button class="pill color-pill active">Black</button>
+            </div>
+          </div>
+
+          <div class="pdp-option">
+            <label>Sleeve</label>
+            <div class="pill-group" id="sleeve-group">
+              <button class="pill sleeve-pill active">Half</button>
+              <button class="pill sleeve-pill">Full</button>
+            </div>
+          </div>
+
+          <div class="pdp-option">
+            <label>Quantity</label>
+            <div class="quantity-selector">
+              <button id="qty-minus" class="qty-btn"><i class="fa-solid fa-minus"></i></button>
+              <input type="number" id="qty-input" value="1" readonly />
+              <button id="qty-plus" class="qty-btn"><i class="fa-solid fa-plus"></i></button>
+            </div>
+          </div>
+
+          <div class="pdp-actions">
+            <button class="btn-add-cart" id="btn-add-cart">Add to cart</button>
+            <button class="btn-buy-now" id="btn-buy-now">Buy it now</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div class="payment-icons">
+        <i class="fa-brands fa-cc-visa"></i>
+        <i class="fa-brands fa-cc-mastercard"></i>
+        <i class="fa-brands fa-cc-amex"></i>
+        <i class="fa-brands fa-cc-stripe"></i>
+        <i class="fa-brands fa-cc-paypal"></i>
+      </div>
+      <div class="footer-links">
+        <span>© 2026, TeesBee</span>
+        <a href="#">Refund and Return Policy</a>
+        <a href="#">Privacy policy</a>
+        <a href="#">Terms of service</a>
+        <a href="#">Shipping policy</a>
+        <a id="link-contact-footer" href="#">Contact information</a>
+      </div>
+    </footer>
+
+    <!-- Search Overlay -->
+    <div id="search-overlay" class="hidden">
+      <div class="search-backdrop" id="search-backdrop"></div>
+      <div class="search-bar">
+        <span>Search</span>
+        <input type="text" id="search-input" placeholder="Name of T-shirt" />
+        <i class="fa-solid fa-magnifying-glass search-submit"></i>
+        <i class="fa-solid fa-xmark" id="search-close" title="Close Search"></i>
+      </div>
+    </div>
+
+    <!-- Cart Drawer -->
+    <div id="cart-overlay" class="hidden">
+      <div class="cart-backdrop" id="cart-backdrop"></div>
+      <div class="cart-drawer" id="cart-drawer">
+        <div class="cart-header">
+          <h2>Your cart</h2>
+          <i class="fa-solid fa-xmark" id="cart-close" title="Close Cart"></i>
+        </div>
+        <div class="cart-table-header">
+          <span style="font-size: 0.75rem; letter-spacing: 1px; color:#888;">PRODUCT</span>
+          <span style="font-size: 0.75rem; letter-spacing: 1px; color:#888;">TOTAL</span>
+        </div>
+        <div class="cart-items" id="cart-items">
+          <!-- Cart items injected here -->
+        </div>
+        <div class="cart-footer">
+          <div class="cart-subtotal">
+            <span style="font-size: 1.15rem; color:#fff;">Estimated total</span>
+            <span id="cart-total-price" style="font-size: 1.15rem; color:#fff; font-weight: 600;">Rs. 0.00</span>
+          </div>
+          <p class="cart-tax-note" style="font-size: 0.8rem; color:#888; margin: 10px 0 25px 0;">Taxes, Discounts and <u>shipping</u> calculated at checkout</p>
+          <button class="btn-checkout" id="btn-checkout" style="width:100%; padding:18px; background:#fff; color:#000; font-weight:700; border:none; border-radius:4px; font-size:1rem; cursor:pointer;" onmouseover="this.style.background='#e5e5e5'" onmouseout="this.style.background='#fff'">Check out</button>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
