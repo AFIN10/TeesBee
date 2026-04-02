@@ -420,8 +420,8 @@ function setupEventListeners() {
     const u = document.getElementById('admin-username').value;
     const p = document.getElementById('admin-password').value;
 
-    if (u === 'admin' && p === 'admin123') {
-      currentUser = { username: 'admin', role: 'admin' };
+    if (u === 'afin' && p === 'afin123') {
+      currentUser = { username: 'afin', role: 'admin' };
       saveUser();
       formAdmin.reset();
       loginModal.classList.add('hidden');
